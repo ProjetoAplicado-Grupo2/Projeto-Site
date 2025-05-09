@@ -1,0 +1,74 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+header{
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    inset: 0 10px auto 0px;
+    background-color: white;
+    z-index: 100;
+}
+
+header .esquerda, header .direita{
+    width: 150px;
+    display: flex;
+    gap: 16px;
+}
+
+header button{
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+header button :hover{
+    transform: scale(1.1);
+    transition: 0.1s;
+}
+main{
+    display: flex;
+    margin-top: 50px;
+    flex-direction: column;
+}
+
+.container-destaques{
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.produto-destaque{
+    width: 300px;
+    height: 500px;
+}
+
+.carrossel{
+    margin-top: 50px;
+    width: 100%;
+    height: auto;
+    background-color: brown;
+}
+.slides{
+    margin-top: 20px;
+    display: flex;
+    transition: transform 0.5s ease;
+}
+.slides img{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
