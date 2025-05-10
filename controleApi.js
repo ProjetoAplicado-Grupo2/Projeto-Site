@@ -1,5 +1,6 @@
 const URL_PRODUTOS = "https://fakestoreapi.com/products"
 let allProducts = []
+console.log("FUNFANDO")
 
 async function acharProdutos() {
     const resp = await fetch(URL_PRODUTOS)
@@ -13,7 +14,7 @@ async function acharProdutos() {
 
 function mostrarDestaques(produtos){
     const destaques = document.querySelector(".container-destaques")
-    for (let i = 0;i < 3;i++){
+    for (let i = 0;i < 5;i++){
         const produtoDestaque = document.createElement('div')
         produtoDestaque.classList.add("produto-destaque")
         produtoDestaque.innerHTML = `
