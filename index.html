@@ -11,17 +11,30 @@
 <body>
     <header>
         <div class="esquerda">
-            <button><i class="fa-solid fa-bars"></i></button>
+            <button><i class="fa-solid fa-bars" onclick="abrirMenu()"></i></button>
         </div>
         <div class="centro">
             <h2>ABEL</h2>
         </div>
         <div class="direita">
-            <button><a href=""></a><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
             <button><i class="fa-solid fa-user"></i></button>
-            <button><i class="fa-solid fa-bag-shopping"></i></button>
+            <button><i class="fa-solid fa-bag-shopping" onclick="abrirSacola()"></i></button>
         </div>
 
+        <div class="menu-lateral" id="menu-lateral">
+            <button class="" id="sair-menu" onclick="fecharMenu()"><i class="fa-solid fa-xmark"></i></button>
+            <ul>
+                <li><a href="categorias.html">SUPORTE</a></li>
+                <li><a href="#">CONFIGURAÇÕES</a></li>
+            </ul>
+        </div>
+        <div class="menu-sacola" id="menu-sacola">
+            <button id="sair-sacola" onclick="fecharSacola()"><i class="fa-solid fa-xmark"></i></button>
+            <ul id="lista-compras">
+
+            </ul>
+        </div>
     </header>
     <div class="carrosel-promos">
         
@@ -35,7 +48,9 @@
         </div>
     </div>
     <main>
+        <h3 class="titulo">DESTAQUES</h3>
         <div class="container-destaques">
+
         </div>
     </main>
 
