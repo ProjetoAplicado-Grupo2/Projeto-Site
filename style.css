@@ -55,11 +55,12 @@ main{
 .produto-destaque{
     width: 300px;
     height: 500px;
+    border: 1px groove #000000;
 }
 
 .carrossel{
     margin-top: 30px;
-    width: 100%;
+    width: 100vw;
     height: auto;
     background-color: brown;
 }
@@ -114,7 +115,7 @@ main{
     height: 100%;
     background-color: white;
     color: #000000;
-    transition: left 0.3s ease;
+    transition: right 0.3s ease;
     padding: 20px;
     box-shadow: 2px 0 5px 5px rgba(0, 0, 0, 0.5);
 }
