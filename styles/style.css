@@ -9,7 +9,7 @@ body{
 
 header{
     position: fixed;
-    width: 100%;
+    width: 99%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,43 +36,12 @@ header button :hover{
     transform: scale(1.1);
     transition: 0.1s;
 }
+
 main{
     display: flex;
-    margin-top: 50px;
+    margin: 50px 10px;
     flex-direction: column;
-}
-
-.container-destaques{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 20px;
-}
-
-.produto-destaque{
-    width: 300px;
-    height: 500px;
-    border: 1px groove #000000;
-}
-
-.carrossel{
-    margin-top: 30px;
-    width: 100vw;
-    height: auto;
-    background-color: brown;
-}
-.slides{
-    margin-top: 20px;
-    display: flex;
-    transition: transform 0.5s ease;
-}
-.slides img{
-    width: 100%;
-    height: auto;
-    object-fit: contain;
+    
 }
 
 .menu-lateral{
@@ -124,7 +93,3 @@ main{
     right: 0px;
 }
 
-.titulo{
-    display: flex;
-    align-self: center;
-}
