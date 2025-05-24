@@ -14,7 +14,7 @@ async function acharProdutos() {
 
 function mostrarDestaques(produtos){
     const destaques = document.querySelector(".container-destaques")
-    for (let i = 0;i < 5;i++){
+    for (let i = 0;i < 4;i++){
         const produtoDestaque = document.createElement('div')
         produtoDestaque.classList.add("produto-destaque")
         produtoDestaque.innerHTML = `
