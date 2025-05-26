@@ -14,7 +14,9 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    inset: 0 10px auto 0px;
+    top: 0;
+    left: 0;
+    right: 0;
     background-color: white;
     z-index: 10;
 }

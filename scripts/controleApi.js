@@ -17,10 +17,12 @@ function mostrarDestaques(produtos){
     for (let i = 0;i < 4;i++){
         const produtoDestaque = document.createElement('div')
         produtoDestaque.classList.add("produto-destaque")
+        produtoDestaque.id = produtos[i].id
         produtoDestaque.innerHTML = `
         <img src="${produtos[i].image}" width="300px" height="300" alt="">
         <p>${produtos[i].title}</p>
         `
+        produtoDestaque.setAttribute("onclick", "escolherProduto(this.id)")
         destaques.appendChild(produtoDestaque)
     }
 }

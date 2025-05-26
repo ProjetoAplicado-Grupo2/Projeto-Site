@@ -13,6 +13,7 @@
     width: 300px;
     height: 380px;
     border: 1px inherit black;
+    cursor: pointer;
 }
 
 .produto-destaque img{

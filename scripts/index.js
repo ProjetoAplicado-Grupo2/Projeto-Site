@@ -38,3 +38,6 @@ function atualizarCarrossel() {
 
 setInterval(atualizarCarrossel, 3000)
 
+function escolherProduto(){
+      
+}
