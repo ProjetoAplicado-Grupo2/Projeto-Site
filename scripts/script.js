@@ -18,3 +18,7 @@ function abrirSacola(){
 function fecharSacola(){
     menuSacola.classList.remove("ativo")
 }
+
+function escolherProduto(produtoId){
+    window.location.href = "produto.html?id=" + encodeURIComponent(produtoId)
+}
