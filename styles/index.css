@@ -33,7 +33,7 @@
 
 .carrossel{
     margin-top: 30px;
-    width: 100vw;
+    width: 101%;
     height: auto;
     background-color: brown;
 }

@@ -3,11 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/produto.css">
+    <script src="https://kit.fontawesome.com/1b82c91aac.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
-    <h1>PRODUTO</h1>
+
+    <header>
+        <div class="esquerda">
+            <button><i class="fa-solid fa-bars" onclick="abrirMenu()"></i></button>
+        </div>
+        <div class="centro">
+            <a href="index.html"><h2>ABEL</h2></a>
+        </div>
+        <div class="direita">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button><i class="fa-solid fa-user"></i></button>
+            <button><i class="fa-solid fa-bag-shopping" onclick="abrirSacola()"></i></button>
+        </div>
+
+        <div class="menu-lateral" id="menu-lateral" onclick="">
+            <button class="" id="sair-menu" onclick="fecharMenu()"><i class="fa-solid fa-xmark"></i></button>
+            <ul>
+                <li><a href="categorias.html">SUPORTE</a></li>
+                <li><a href="#">CONFIGURAÇÕES</a></li>
+            </ul>
+        </div>
+        <div class="menu-sacola" id="menu-sacola">
+            <button id="sair-sacola" onclick="fecharSacola()"><i class="fa-solid fa-xmark"></i></button>
+            <ul id="lista-compras">
+
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <div class="produto-esquerda">
+            <img src="" alt="" id="imagemProduto">
+        </div>
+
+        <div class="produto-direita">
+            <h1 id="nomeProduto"></h1>
+            <h3 id="precoProduto"></h3>
+
+            <h3>TAMANHO</h3>
+            <ul>
+                <li><input type="radio" name="tamanho" value="2" id="">P</li>
+                <li><input type="radio" name="tamanho" value="3" id="">M</li>
+                <li><input type="radio" name="tamanho" value="4" id="">G</li>
+            </ul>
+
+            <button onclick="comprar()">COMPRAR</button>
+        </div>
+        
+    </main>
 
     <script src="scripts/script.js"></script>
+    <script src="scripts/produto.js"></script>
 </body>
 </html> 
