@@ -1,0 +1,55 @@
+html, body{
+    height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main{
+
+    margin-top: 100px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-direction: row;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.produto-esquerda{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 45%;
+}
+.produto-esquerda img{
+    object-fit: contain;
+    max-height: 50vh;
+}
+
+.produto-direita{
+    background-color: lightblue;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.produto-direita ul{
+    display: flex;
+    flex-direction: row;
+    width: 25%;
+    justify-content: space-between;
+    list-style: none;
+    background-color: lightcoral;
+}
+
+.produto-direita button{
+
+    width:  20%;
+    height: 20px;
+}

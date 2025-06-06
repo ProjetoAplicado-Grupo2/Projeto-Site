@@ -21,6 +21,11 @@ header{
     z-index: 10;
 }
 
+header a{
+    text-decoration: none;
+    color: #000000;
+}
+
 header .esquerda, header .direita{
     width: 150px;
     display: flex;
