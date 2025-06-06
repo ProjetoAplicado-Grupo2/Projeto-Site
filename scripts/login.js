@@ -36,3 +36,10 @@ function tentarLogin() {
         alert('E-mail ou senha inválidos!');
     }
 }
+
+function deslogarUsuario() {
+    localStorage.removeItem('tokenLogado');
+    localStorage.removeItem('usuarioLogado');
+    alert('Você saiu da sua conta.');
+    window.location.href = "index.html";
+}
