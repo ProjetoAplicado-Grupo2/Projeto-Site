@@ -7,6 +7,7 @@ const imagemProduto = document.getElementById("imagemProduto")
 const nomeProduto = document.getElementById("nomeProduto")
 const precoProduto = document.getElementById("precoProduto")
 
+let produtoAtual = null;
 
 if(idProduto){
     console.log("Entrou " + idProduto)
@@ -18,6 +19,7 @@ if(idProduto){
             nomeProduto.textContent = produto.title
             imagemProduto.src= produto.image
             precoProduto.textContent = "R$ " + produto.price
+            produtoAtual = produto;
         } catch(error) {
             console.log("Erro ao achar o produto. CÓDIGO: " + error)
         }
@@ -32,5 +34,17 @@ if(idProduto){
 
 
 function comprar(){
-    console.log("Comprado")
+    if (!produtoAtual) return;
+    if (typeof adicionarAoCarrinho === "function") {
+        adicionarAoCarrinho({
+            id: produtoAtual.id,
+            nome: produtoAtual.title,
+            preco: produtoAtual.price,
+            quantidade: 1,
+            imagem: produtoAtual.image
+        });
+        abrirSacola && abrirSacola();
+    } else {
+        alert("Função de carrinho não encontrada!");
+    }
 }
