@@ -38,11 +38,17 @@
 
     <main>
         <h3>ABEL</h3>
-        <input type="text" name="" id="inputNome" placeholder="nome">
+        <input type="text" name="" id="inputNome" placeholder="e-mail">
         <input type="password" name=" " id="inputSenha" placeholder="senha">
-        <input type="button" value="REGISTRAR">
+        <input type="button" value="REGISTRAR" onclick="registrarUsuario()">
         <input type="button" value="LOGAR" onclick="tentarLogin()">
+        <div id="tokenArea" style="display:none; margin-top:10px;">
+            <label>Seu token:</label>
+            <input type="text" id="tokenUsuario" readonly style="width:100%;">
+        </div>
     </main>
+
+    
 
     <script src="scripts/login.js"></script>
     <script src="scripts/script.js"></script>

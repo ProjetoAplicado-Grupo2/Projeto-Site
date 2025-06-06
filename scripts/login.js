@@ -1,14 +1,38 @@
+function gerarToken() {
+    return Math.random().toString(36).substr(2) + Date.now().toString(36);
+}
 
-async function tentarLogin() {
-    const nome = document.getElementById("inputNome")
-    const senha = document.getElementById("inputSenha")
-    console.log("Nome: " + nome.value + " Senha: " + senha.value)
-    const credentials = {username: nome.value, password: senha.value};
-    fetch('https://fakestoreapi.com/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(credentials)
-    })
-      .then(response => response.json())
-      .then(data => console.log(data));
+function registrarUsuario() {
+    const email = document.getElementById('inputNome').value.trim().toLowerCase();
+    const senha = document.getElementById('inputSenha').value;
+    if (!email || !senha) {
+        alert('Preencha o e-mail e a senha!');
+        return;
+    }
+    let usuarios = JSON.parse(localStorage.getItem('usuarios') || '{}');
+    if (usuarios[email]) {
+        alert('E-mail já cadastrado!');
+        return;
+    }
+    const token = gerarToken();
+    usuarios[email] = { senha, token };
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    localStorage.setItem('tokenLogado', token);
+    localStorage.setItem('usuarioLogado', email);
+    alert('Usuário registrado com sucesso!');
+    window.location.href = "index.html";
+}
+
+function tentarLogin() {
+    const email = document.getElementById('inputNome').value.trim().toLowerCase();
+    const senha = document.getElementById('inputSenha').value;
+    let usuarios = JSON.parse(localStorage.getItem('usuarios') || '{}');
+    if (usuarios[email] && usuarios[email].senha === senha) {
+        localStorage.setItem('tokenLogado', usuarios[email].token);
+        localStorage.setItem('usuarioLogado', email);
+        alert('Login realizado com sucesso!');
+        window.location.href = "index.html";
+    } else {
+        alert('E-mail ou senha inválidos!');
+    }
 }
