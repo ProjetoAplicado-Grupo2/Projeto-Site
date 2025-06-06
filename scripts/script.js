@@ -40,6 +40,11 @@ function setCarrinhoAtual(carrinho) {
 }
 
 function adicionarAoCarrinho(item) {
+    const token = getTokenLogado();
+    if (!token) {
+        alert('Você precisa estar logado para adicionar itens ao carrinho.');
+        return;
+    }
     let carrinho = getCarrinhoAtual();
     const idx = carrinho.findIndex(i => i.id === item.id);
     if (idx > -1) {
