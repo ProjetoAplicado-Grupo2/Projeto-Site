@@ -1,45 +1,94 @@
-function gerarToken() {
-    return Math.random().toString(36).substr(2) + Date.now().toString(36);
-}
+const API_URL = 'https://fakestoreapi.com/users';
+const LOGIN_URL = 'https://fakestoreapi.com/auth/login';
 
 function registrarUsuario() {
-    const email = document.getElementById('inputNome').value.trim().toLowerCase();
+    const nome = document.getElementById('inputNome').value;
     const senha = document.getElementById('inputSenha').value;
-    if (!email || !senha) {
-        alert('Preencha o e-mail e a senha!');
+
+    if (!nome || !senha) {
+        alert('Preencha nome e senha!');
         return;
     }
-    let usuarios = JSON.parse(localStorage.getItem('usuarios') || '{}');
-    if (usuarios[email]) {
-        alert('E-mail já cadastrado!');
-        return;
-    }
-    const token = gerarToken();
-    usuarios[email] = { senha, token };
-    localStorage.setItem('usuarios', JSON.stringify(usuarios));
-    localStorage.setItem('tokenLogado', token);
-    localStorage.setItem('usuarioLogado', email);
-    alert('Usuário registrado com sucesso!');
-    window.location.href = "index.html";
+
+    // Fake Store API exige mais campos, vamos preencher com dados fictícios
+    const usuario = {
+        email: nome + "@exemplo.com",
+        username: nome,
+        password: senha,
+        name: {
+            firstname: nome,
+            lastname: "User"
+        },
+        address: {
+            city: "Cidade",
+            street: "Rua",
+            number: 1,
+            zipcode: "00000-000",
+            geolocation: {
+                lat: "0",
+                long: "0"
+            }
+        },
+        phone: "000000000"
+    };
+
+    fetch(API_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(usuario)
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Erro ao registrar');
+        return response.json();
+    })
+    .then(data => {
+        alert('Usuário registrado com sucesso!');
+    })
+    .catch(error => {
+        alert('Erro ao registrar: ' + error.message);
+    });
 }
 
 function tentarLogin() {
-    const email = document.getElementById('inputNome').value.trim().toLowerCase();
+    const nome = document.getElementById('inputNome').value;
     const senha = document.getElementById('inputSenha').value;
-    let usuarios = JSON.parse(localStorage.getItem('usuarios') || '{}');
-    if (usuarios[email] && usuarios[email].senha === senha) {
-        localStorage.setItem('tokenLogado', usuarios[email].token);
-        localStorage.setItem('usuarioLogado', email);
-        alert('Login realizado com sucesso!');
-        window.location.href = "index.html";
-    } else {
-        alert('E-mail ou senha inválidos!');
+
+    if (!nome || !senha) {
+        alert('Preencha nome e senha!');
+        return;
     }
+
+    fetch(LOGIN_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: nome, password: senha })
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Login inválido');
+        return response.json();
+    })
+    .then(data => {
+        if (data.token) {
+            document.getElementById('tokenUsuario').value = data.token;
+            document.getElementById('tokenArea').style.display = 'flex';
+            alert('Login realizado!');
+        } else {
+            alert('Token não recebido!');
+        }
+    })
+    .catch(error => {
+        alert('Erro ao logar: ' + error.message);
+    });
 }
 
 function deslogarUsuario() {
-    localStorage.removeItem('tokenLogado');
-    localStorage.removeItem('usuarioLogado');
-    alert('Você saiu da sua conta.');
-    window.location.href = "index.html";
+    document.getElementById('inputNome').value = '';
+    document.getElementById('inputSenha').value = '';
+    document.getElementById('tokenUsuario').value = '';
+    document.getElementById('tokenArea').style.display = 'none';
+    alert('Deslogado!');
 }
