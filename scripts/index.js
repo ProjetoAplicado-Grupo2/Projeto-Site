@@ -42,15 +42,15 @@ const carrosselSlides = document.querySelector(".slides")
 const SlidesCarrossel = [
     {
         imagem: "imagens/imagemMoletom.png", 
-        link: "categorias.html"
+        categoria: "jacket"
     },
     {
         imagem: "imagens/imagemLeve.png",
-        link: "categorias.html"
+        categoria: "shirt"
     },
     {
         imagem: "imagens/imagemsEstonada.png",
-        link: "categorias.html"
+        categoria: "women"
     }
 ]
 
@@ -60,7 +60,7 @@ SlidesCarrossel.forEach(slide => {
     img.src = slide.imagem
     img.style.cursor = 'pointer'
     img.addEventListener("click", ()=>{
-        window.location.href = slide.link
+        window.location.href = "categorias.html?categoria=" + encodeURIComponent(slide.categoria)
     })
 
     carrosselSlides.appendChild(img)
