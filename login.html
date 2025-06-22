@@ -8,12 +8,41 @@
     <title>Login</title>
     <style>
         body {
-            background: linear-gradient(135deg, #ececec 0%, #f7f7f7 100%);
+            background: linear-gradient(135deg, #e7eaf6 0%, #a7b8e6 100%);
             min-height: 100vh;
             margin: 0;
             display: flex;
             flex-direction: column;
             font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        }
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .navbar {
+            flex: 1;
+        }
+        .nav-open-btn,
+        .cart-btn-left {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .nav-open-btn {
+            margin-left: 0;
+        }
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 0;
         }
 
         .login-container {
@@ -143,33 +172,44 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="esquerda">
-            <button><i class="fa-solid fa-bars" onclick="abrirMenu()"></i></button>
-        </div>
-        <div class="centro">
-            <a href="index.html"><h2>ABEL</h2></a>
-        </div>
-        <div class="direita">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button><a href="login.html"><i class="fa-solid fa-user"></i></a></button>
-            <button><i class="fa-solid fa-bag-shopping" onclick="abrirSacola()"></i></button>
-        </div>
+  <header class="header" data-header>
+    <div class="container">
+      <button class="nav-open-btn" aria-label="toggle menu" data-nav-toggler>
+        <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+      </button>
+      <a href="index.html" class="logo">
+        <img src="./imagens/ABEL.png" width="132" height="27" alt="Logo do Abel">
+      </a>
 
-        <div class="menu-lateral" id="menu-lateral" onclick="">
-            <button class="" id="sair-menu" onclick="fecharMenu()"><i class="fa-solid fa-xmark"></i></button>
-            <ul>
-                <li><a href="categorias.html">SUPORTE</a></li>
-                <li><a href="#">CONFIGURAÇÕES</a></li>
-            </ul>
-        </div>
-        <div class="menu-sacola" id="menu-sacola">
-            <button id="sair-sacola" onclick="fecharSacola()"><i class="fa-solid fa-xmark"></i></button>
-            <ul id="lista-compras">
+      <nav class="navbar" data-navbar>
+        <ul class="navbar-list">
+          <li class="navbar-link">
+            <a href="#" class="navbar-link">Início</a>
+          </li>
+          <li class="navbar-link">
+            <a href="#" class="navbar-link">Entrar</a>
+          </li>
+          <li class="navbar-link">
+            <a href="#" class="navbar-link">Produtos</a>
+          </li>
+        </ul>
 
-            </ul>
-        </div>
-    </header>
+      </nav>
+
+      <button class="cart-btn-left" id="open-cart-sidebar" aria-label="sacola" style="background:none;border:none;cursor:pointer;margin-left:10px;position:relative;">
+        <span id="cart-count-badge" style="position:absolute;top:-8px;right:2px;z-index:-1;background:#2d6a4f;color:#fff;font-size:0.85rem;padding:2px 7px;border-radius:12px;min-width:22px;text-align:center;display:none;pointer-events:none;">0</span>
+        <ion-icon name="bag" style="font-size:1.7rem;vertical-align:middle;"></ion-icon>
+      </button>
+    </div>
+  </header>
+  <div id="cart-sidebar" style="position:fixed;top:0;right:-400px;width:350px;max-width:90vw;height:100vh;background:#fff;box-shadow:-4px 0 24px rgba(10,23,78,0.13);z-index:9999;transition:right 0.3s;display:flex;flex-direction:column;padding:32px 18px 18px 18px;">
+    <button id="close-cart-sidebar" style="align-self:flex-end;background:none;border:none;font-size:2rem;cursor:pointer;margin-bottom:12px;">&times;</button>
+    <h3 style="text-align:center;font-size:1.3rem;margin-bottom:18px;">Sacola</h3>
+    <div id="cart-items" style="flex:1;overflow-y:auto;"></div>
+    <div id="cart-total" style="font-weight:bold;font-size:1.1rem;margin:18px 0 10px 0;text-align:right;">Total: R$ 0,00</div>
+    <a href="sacola.html" style="width:100%;display:block;text-align:center;background:#222;color:#fff;padding:12px 0;border-radius:8px;font-weight:bold;text-decoration:none;">Ir para Sacola</a>
+  </div>
+  <div id="cart-sidebar-overlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.18);z-index:9998;"></div>
 
     <main>
         <div class="login-container">
@@ -192,5 +232,150 @@
 
     <script src="scripts/login.js"></script>
     <script src="scripts/script.js"></script>
+    <script>
+    // Redirecionar para login/cadastro/produtos/sair ao clicar nos links do header
+    document.addEventListener('DOMContentLoaded', function() {
+      const links = document.querySelectorAll('.navbar-link a');
+      links.forEach(link => {
+        const txt = link.textContent.trim().toLowerCase();
+        if (txt === 'entrar') {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'login.html';
+          });
+        }
+        if (txt === 'cadastrar') {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'cadastro.html';
+          });
+        }
+        if (txt === 'produtos') {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'produto.html';
+          });
+        }
+        if (txt === 'sair') {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('tokenLogado');
+            window.location.reload();
+          });
+        }
+      });
+    });
+    // Toggle menu mobile
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggler = document.querySelector('[data-nav-toggler]');
+      const header = document.querySelector('[data-header]');
+      const navbar = document.querySelector('[data-navbar]');
+      if (navToggler && navbar) {
+        navToggler.addEventListener('click', function() {
+          navbar.classList.toggle('active');
+          header.classList.toggle('nav-active');
+        });
+      }
+    });
+    // Sidebar da sacola
+    function renderCartSidebar() {
+      const cart = JSON.parse(localStorage.getItem('carrinhoAbel') || '[]');
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      if (!cartItems || !cartTotal) return;
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p style="text-align:center;color:#888;">Sua sacola está vazia.</p>';
+        cartTotal.textContent = 'Total: R$ 0,00';
+        return;
+      }
+      let total = 0;
+      cartItems.innerHTML = cart.map(item => {
+        total += item.price * item.qtd;
+        return `<div style='display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;'>
+          <img src='${item.image}' alt='' style='width:38px;height:38px;object-fit:contain;border-radius:6px;margin-right:8px;'>
+          <span style='flex:1;font-size:0.98rem;'>${item.title.length > 15 ? item.title.slice(0,15)+'...' : item.title}</span>
+          <span style='margin:0 8px;'>x${item.qtd}</span>
+          <span style='font-weight:bold;'>R$${(item.price*item.qtd).toFixed(2)}</span>
+        </div>
+        <div style='display:flex;gap:6px;justify-content:flex-end;margin-bottom:18px;'>
+          <button class='cart-minus' data-id='${item.id}' style='width:28px;height:28px;border-radius:50%;border:1px solid #aaa;background:#f7f7f7;font-size:1.1rem;cursor:pointer;'>-</button>
+          <button class='cart-plus' data-id='${item.id}' style='width:28px;height:28px;border-radius:50%;border:1px solid #aaa;background:#f7f7f7;font-size:1.1rem;cursor:pointer;'>+</button>
+          <button class='cart-remove' data-id='${item.id}' style='width:28px;height:28px;border-radius:50%;border:1px solid #e74c3c;background:#fff;color:#e74c3c;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;' title='Remover'><ion-icon name="trash-outline"></ion-icon></button>
+        </div>`;
+      }).join('');
+      cartTotal.textContent = 'Total: R$ ' + total.toFixed(2);
+      // Eventos para os botões de quantidade e remover
+      setTimeout(() => {
+        document.querySelectorAll('.cart-plus').forEach(btn => {
+          btn.onclick = function() {
+            const id = Number(this.dataset.id);
+            let cart = JSON.parse(localStorage.getItem('carrinhoAbel') || '[]');
+            const found = cart.find(item => item.id === id);
+            if (found) found.qtd += 1;
+            localStorage.setItem('carrinhoAbel', JSON.stringify(cart));
+            renderCartSidebar();
+          };
+        });
+        document.querySelectorAll('.cart-minus').forEach(btn => {
+          btn.onclick = function() {
+            const id = Number(this.dataset.id);
+            let cart = JSON.parse(localStorage.getItem('carrinhoAbel') || '[]');
+            const found = cart.find(item => item.id === id);
+            if (found && found.qtd > 1) {
+              found.qtd -= 1;
+            } else {
+              // Remove se chegar a 1 e clicar em -
+              const idx = cart.findIndex(item => item.id === id);
+              if (idx !== -1) cart.splice(idx, 1);
+            }
+            localStorage.setItem('carrinhoAbel', JSON.stringify(cart));
+            renderCartSidebar();
+          };
+        });
+        document.querySelectorAll('.cart-remove').forEach(btn => {
+          btn.onclick = function() {
+            const id = Number(this.dataset.id);
+            let cart = JSON.parse(localStorage.getItem('carrinhoAbel') || '[]');
+            cart = cart.filter(item => item.id !== id);
+            localStorage.setItem('carrinhoAbel', JSON.stringify(cart));
+            renderCartSidebar();
+          };
+        });
+      }, 0);
+    }
+    document.getElementById('open-cart-sidebar').onclick = function() {
+      renderCartSidebar();
+      document.getElementById('cart-sidebar').style.right = '0';
+      document.getElementById('cart-sidebar-overlay').style.display = 'block';
+    };
+    document.getElementById('close-cart-sidebar').onclick = function() {
+      document.getElementById('cart-sidebar').style.right = '-400px';
+      document.getElementById('cart-sidebar-overlay').style.display = 'none';
+    };
+    document.getElementById('cart-sidebar-overlay').onclick = function() {
+      document.getElementById('cart-sidebar').style.right = '-400px';
+      document.getElementById('cart-sidebar-overlay').style.display = 'none';
+    };
+    // Atualizar contador da sacola
+    function updateCartCountBadge() {
+      const badge = document.getElementById('cart-count-badge');
+      let cart = JSON.parse(localStorage.getItem('carrinhoAbel') || '[]');
+      const totalQtd = cart.reduce((sum, item) => sum + item.qtd, 0);
+      if (totalQtd > 0) {
+        badge.textContent = totalQtd;
+        badge.style.display = 'inline-block';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+    document.addEventListener('DOMContentLoaded', updateCartCountBadge);
+    document.getElementById('open-cart-sidebar').addEventListener('click', updateCartCountBadge);
+    // Atualiza também após qualquer alteração no carrinho
+    const origSetItem = localStorage.setItem;
+    localStorage.setItem = function(key, value) {
+      origSetItem.apply(this, arguments);
+      if (key === 'carrinhoAbel') updateCartCountBadge();
+    };
+  </script>
 </body>
 </html>

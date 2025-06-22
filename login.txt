@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://kit.fontawesome.com/1b82c91aac.js" crossorigin="anonymous"></script>
+    <title>Login</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ececec 0%, #f7f7f7 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        }
+
+        .login-container {
+            background: rgba(255,255,255,0.22);
+            border-radius: 28px;
+            box-shadow: 0 12px 48px rgba(10,23,78,0.25);
+            width: 500px;
+            min-width: 0;
+            max-width: 98vw;
+            min-height: 350px;
+            max-height: 95vh;
+            padding: 38px 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            box-sizing: border-box;
+            backdrop-filter: blur(4px);
+            border: 1.5px solid rgba(255,255,255,0.18);
+            position: relative;
+            gap: 0.5rem;
+            overflow-y: unset;
+        }
+        .login-container h3 {
+            display: none;
+        }
+        .login-icon {
+            color: #222;
+            font-size: 2.7rem;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 12px rgba(10,23,78,0.08);
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            margin-bottom: 18px;
+            padding: 13px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            background: rgba(255,255,255,0.82);
+            font-size: 1.08rem;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(10,23,78,0.09);
+            transition: box-shadow 0.2s, background 0.2s;
+            color: #222;
+        }
+        .login-container input[type="text"]:focus,
+        .login-container input[type="password"]:focus {
+            box-shadow: 0 4px 20px rgba(10,23,78,0.18);
+            background: #fff;
+        }
+        .login-container input[type="button"] {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 13px 0;
+            border-radius: 10px;
+            border: 1px solid #222;
+            background: #fff;
+            color: #222;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, transform 0.1s, box-shadow 0.2s;
+            font-size: 1.08rem;
+            box-shadow: 0 2px 12px rgba(10,23,78,0.07);
+            letter-spacing: 1px;
+            text-shadow: none;
+        }
+        .login-container input[type="button"]:last-of-type {
+            margin-bottom: 0;
+        }
+        .login-container input[type="button"]:hover {
+            background: #222;
+            color: #fff;
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 8px 32px rgba(10,23,78,0.12);
+        }
+        .login-container input[type="button"]:active {
+            transform: scale(0.98);
+        }
+        #tokenArea {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 12px;
+        }
+        #tokenArea label {
+            color: #222;
+            margin-bottom: 7px;
+            text-align: center;
+            width: 100%;
+            font-size: 1.02rem;
+            font-weight: 500;
+            text-shadow: none;
+        }
+        #tokenArea input {
+            color: #222;
+            background: rgba(255,255,255,0.97);
+            border-radius: 8px;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 1.02rem;
+            box-shadow: 0 1px 6px rgba(10,23,78,0.09);
+        }
+        @media (max-width: 600px) {
+            .login-container {
+                padding: 22px 4vw;
+                width: 98vw;
+                max-width: 98vw;
+                min-height: unset;
+                max-height: 98vh;
+            }
+            .login-container h3 {
+                font-size: 1.3rem;
+            }
+        }
+        @media (max-width: 400px), (max-height: 400px) {
+            .login-container {
+                width: 99vw;
+                max-width: 99vw;
+                padding: 10px 2vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="esquerda">
+            <button><i class="fa-solid fa-bars" onclick="abrirMenu()"></i></button>
+        </div>
+        <div class="centro">
+            <a href="index.html"><h2>ABEL</h2></a>
+        </div>
+        <div class="direita">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button><a href="login.html"><i class="fa-solid fa-user"></i></a></button>
+            <button><i class="fa-solid fa-bag-shopping" onclick="abrirSacola()"></i></button>
+        </div>
+
+        <div class="menu-lateral" id="menu-lateral" onclick="">
+            <button class="" id="sair-menu" onclick="fecharMenu()"><i class="fa-solid fa-xmark"></i></button>
+            <ul>
+                <li><a href="categorias.html">SUPORTE</a></li>
+                <li><a href="#">CONFIGURAÇÕES</a></li>
+            </ul>
+        </div>
+        <div class="menu-sacola" id="menu-sacola">
+            <button id="sair-sacola" onclick="fecharSacola()"><i class="fa-solid fa-xmark"></i></button>
+            <ul id="lista-compras">
+
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <div class="login-container">
+            <div class="login-icon">
+                <i class="fa-solid fa-user-circle"></i>
+            </div>
+            <input type="text" name="" id="inputNome" placeholder="NOME">
+            <input type="password" name=" " id="inputSenha" placeholder="SENHA">
+            <input type="button" value="REGISTRAR" onclick="registrarUsuario()">
+            <input type="button" value="LOGAR" onclick="tentarLogin()">
+            <input type="button" value="DESLOGAR" onclick="deslogarUsuario()">
+            <div id="tokenArea" style="display:none;">
+                <label>Seu token:</label>
+                <input type="text" id="tokenUsuario" readonly>
+            </div>
+        </div>
+    </main>
+
+    
+
+    <script src="scripts/login.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+</html>
