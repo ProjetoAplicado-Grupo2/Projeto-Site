@@ -1,185 +1,322 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/produto.css">
+    <title>Produtos | ABEL</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./assets/fonts/fonts.css">
     <script src="https://kit.fontawesome.com/1b82c91aac.js" crossorigin="anonymous"></script>
-    <title>Produto</title>
     <style>
-        body {
-            background: linear-gradient(135deg, #ececec 0%, #f7f7f7 100%);
-            margin: 0;
-            min-height: 100vh;
-            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+      body {
+        background: linear-gradient(135deg, #e7eaf6 0%, #a7b8e6 100%);
+        min-height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+      }
+      .produtos-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 48px 16px 32px 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .produtos-title {
+        font-size: 2.1rem;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 32px;
+        text-align: center;
+      }
+      .produtos-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 32px 24px;
+        width: 100%;
+        justify-items: center;
+      }
+      .produto-card {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 4px 24px rgba(10,23,78,0.10);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 18px 18px 18px;
+        width: 100%;
+        max-width: 260px;
+        min-height: 340px;
+        transition: box-shadow 0.2s;
+      }
+      .produto-card:hover {
+        box-shadow: 0 8px 32px rgba(10,23,78,0.18);
+      }
+      .produto-card img {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        margin-bottom: 12px;
+      }
+      .produto-card h3 {
+        font-size: 1.1rem;
+        margin: 8px 0 4px 0;
+        text-align: center;
+        color: #222;
+      }
+      .produto-card .preco {
+        font-weight: bold;
+        color: #2d6a4f;
+        font-size: 1.08rem;
+        margin-bottom: 10px;
+      }
+      .produto-card .comprar-btn {
+        background: #222;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 0;
+        width: 100%;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, transform 0.1s, box-shadow 0.2s;
+        box-shadow: 0 2px 12px rgba(10,23,78,0.07);
+        letter-spacing: 1px;
+      }
+      .produto-card .comprar-btn:hover {
+        background: #2d6a4f;
+      }
+      @media (max-width: 1100px) {
+        .produtos-grid {
+          grid-template-columns: repeat(3, 1fr);
         }
-        main {
-            min-height: 100vh;
-            width: 100vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+      }
+      @media (max-width: 800px) {
+        .produtos-grid {
+          grid-template-columns: repeat(2, 1fr);
         }
-        .produto-container {
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 4px 24px rgba(10,23,78,0.10);
-            padding: 36px 32px;
-            width: 500px;
-            max-width: 98vw;
-            min-height: 520px; /* deixa mais longo */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
+      }
+      @media (max-width: 500px) {
+        .produtos-grid {
+          grid-template-columns: 1fr;
         }
-        .produto-img {
-            width: 180px;
-            height: 180px;
-            background: #f5f5f5;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-            box-shadow: 0 1px 8px rgba(10,23,78,0.07);
-        }
-        .produto-img img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-        .produto-container h1 {
-            color: #222;
-            font-size: 1.5rem;
-            margin: 0 0 4px 0;
-            font-weight: bold;
-            text-align: center;
-        }
-        .produto-container .preco {
-            color: #444;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-        .produto-container label,
-        .produto-container ul li,
-        .produto-container ul li label {
-            font-weight: bold;
-            color: #222;
-        }
-        .produto-container ul {
-            display: flex;
-            gap: 18px;
-            list-style: none;
-            padding: 0;
-            margin: 0 0 8px 0;
-            justify-content: center;
-            width: 100%;
-        }
-        .produto-container ul li {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 1rem;
-            color: #222;
-            font-weight: 500;
-        }
-        .produto-container input[type="radio"] {
-            accent-color: #888;
-            width: 18px;
-            height: 18px;
-        }
-        .produto-container button {
-            margin-top: 10px;
-            padding: 13px 0;
-            border-radius: 10px;
-            border: 1px solid #222;
-            background: #fff;
-            color: #222;
-            font-weight: bold;
-            font-size: 1.08rem;
-            letter-spacing: 1px;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 2px 12px rgba(10,23,78,0.07);
-            transition: background 0.2s, color 0.2s, transform 0.1s, box-shadow 0.2s;
-            text-shadow: none;
-        }
-        .produto-container button:hover {
-            background: #222;
-            color: #fff;
-            transform: translateY(-2px) scale(1.04);
-            box-shadow: 0 8px 32px rgba(10,23,78,0.12);
-        }
-        @media (max-width: 500px) {
-            .produto-container {
-                padding: 14px 2vw;
-                width: 98vw;
-                min-height: 400px;
-            }
-            .produto-img {
-                width: 120px;
-                height: 120px;
-            }
-        }
+      }
     </style>
 </head>
 <body>
-
-    <header>
-        <div class="esquerda">
-            <button><i class="fa-solid fa-bars" onclick="abrirMenu()"></i></button>
+  <header class="header" data-header>
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="./imagens/ABEL.png" width="132" height="27" alt="Logo do Abel">
+      </a>
+      <nav class="navbar" data-navbar>
+        <ul class="navbar-list">
+          <li class="navbar-link"><a href="index.html" class="navbar-link">Início</a></li>
+          <li class="navbar-link"><a href="login.html" class="navbar-link">Entrar</a></li>
+          <li class="navbar-link"><a href="produto.html" class="navbar-link">Produtos</a></li>
+        </ul>
+      </nav>
+      <button class="nav-open-btn" aria-label="toggle menu" data-nav-toggler>
+        <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+      </button>
+      <button class="cart-btn-left" id="open-cart-sidebar" aria-label="sacola" style="background:none;border:none;cursor:pointer;margin-left:10px;position:relative;">
+        <span id="cart-count-badge" style="position:absolute;top:-8px;right:2px;z-index:-1;background:#2d6a4f;color:#fff;font-size:0.85rem;padding:2px 7px;border-radius:12px;min-width:22px;text-align:center;display:none;pointer-events:none;">0</span>
+        <ion-icon name="bag" style="font-size:1.7rem;vertical-align:middle;"></ion-icon>
+      </button>
+    </div>
+  </header>
+  <main>
+    <div class="produtos-container">
+      <h1 class="produtos-title">Todos os Produtos</h1>
+      <div class="produtos-grid" id="produtos-grid">
+        <!-- Produtos serão carregados aqui -->
+      </div>
+    </div>
+  </main>
+  <div id="cart-sidebar" style="position:fixed;top:0;right:-400px;width:350px;max-width:90vw;height:100vh;background:#fff;box-shadow:-4px 0 24px rgba(10,23,78,0.13);z-index:9999;transition:right 0.3s;display:flex;flex-direction:column;padding:32px 18px 18px 18px;">
+    <button id="close-cart-sidebar" style="align-self:flex-end;background:none;border:none;font-size:2rem;cursor:pointer;margin-bottom:12px;">&times;</button>
+    <h3 style="text-align:center;font-size:1.3rem;margin-bottom:18px;">Sacola</h3>
+    <div id="cart-items" style="flex:1;overflow-y:auto;"></div>
+    <div id="cart-total" style="font-weight:bold;font-size:1.1rem;margin:18px 0 10px 0;text-align:right;">Total: R$ 0,00</div>
+    <a href="sacola.html" style="width:100%;display:block;text-align:center;background:#222;color:#fff;padding:12px 0;border-radius:8px;font-weight:bold;text-decoration:none;">Ir para Sacola</a>
+  </div>
+  <div id="cart-sidebar-overlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.18);z-index:9998;"></div>
+  <script>
+    // Redirecionar para login/cadastro/produtos/sair ao clicar nos links do header
+    document.addEventListener('DOMContentLoaded', function() {
+      const links = document.querySelectorAll('.navbar-link a');
+      links.forEach(link => {
+        const txt = link.textContent.trim().toLowerCase();
+        if (txt === 'entrar') {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'login.html';
+          });
+        }
+        if (txt === 'cadastrar') {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'cadastro.html';
+          });
+        }
+        if (txt === 'produtos') {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'produto.html';
+          });
+        }
+        if (txt === 'sair') {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('tokenLogado');
+            window.location.reload();
+          });
+        }
+      });
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('https://fakestoreapi.com/products')
+        .then(res => res.json())
+        .then(products => {
+          const grid = document.getElementById('produtos-grid');
+          grid.innerHTML = '';
+          products.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'produto-card';
+            card.innerHTML = `
+              <img src="${product.image}" alt="${product.title}">
+              <h3>${product.title}</h3>
+              <div class="preco">R$${product.price.toFixed(2)}</div>
+              <a href="#" class="btn product-btn"><ion-icon name="bag" aria-hidden="true"></ion-icon> <span class="span">Comprar</span></a>
+            `;
+            card.querySelector('.product-btn').onclick = function(e) {
+              e.preventDefault();
+              let cart = JSON.parse(localStorage.getItem('carrinhoAbel') || '[]');
+              const prodId = product.id;
+              const found = cart.find(item => item.id === prodId);
+              if (found) {
+                found.qtd += 1;
+              } else {
+                cart.push({ id: prodId, title: product.title, price: product.price, image: product.image, qtd: 1 });
+              }
+              localStorage.setItem('carrinhoAbel', JSON.stringify(cart));
+              this.innerHTML = '<ion-icon name="checkmark-circle" style="color:#2d6a4f"></ion-icon> <span class="span">Adicionado!</span>';
+              setTimeout(() => {
+                this.innerHTML = '<ion-icon name="bag" aria-hidden="true"></ion-icon> <span class="span">Comprar</span>';
+              }, 1000);
+            };
+            grid.appendChild(card);
+          });
+        });
+    });
+  </script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script>
+    // Sidebar da sacola
+    function renderCartSidebar() {
+      const cart = JSON.parse(localStorage.getItem('carrinhoAbel') || '[]');
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      if (!cartItems || !cartTotal) return;
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p style="text-align:center;color:#888;">Sua sacola está vazia.</p>';
+        cartTotal.textContent = 'Total: R$ 0,00';
+        return;
+      }
+      let total = 0;
+      cartItems.innerHTML = cart.map(item => {
+        total += item.price * item.qtd;
+        return `<div style='display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;'>
+          <img src='${item.image}' alt='' style='width:38px;height:38px;object-fit:contain;border-radius:6px;margin-right:8px;'>
+          <span style='flex:1;font-size:0.98rem;'>${item.title.length > 15 ? item.title.slice(0,15)+'...' : item.title}</span>
+          <span style='margin:0 8px;'>x${item.qtd}</span>
+          <span style='font-weight:bold;'>R$${(item.price*item.qtd).toFixed(2)}</span>
         </div>
-        <div class="centro">
-            <a href="index.html"><h2>ABEL</h2></a>
-        </div>
-        <div class="direita">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button><a href="login.html"><i class="fa-solid fa-user"></i></a></button>
-            <button><i class="fa-solid fa-bag-shopping" onclick="abrirSacola()"></i></button>
-        </div>
-
-        <div class="menu-lateral" id="menu-lateral" onclick="">
-            <button class="" id="sair-menu" onclick="fecharMenu()"><i class="fa-solid fa-xmark"></i></button>
-            <ul>
-                <li><a href="categorias.html">SUPORTE</a></li>
-                <li><a href="#">CONFIGURAÇÕES</a></li>
-            </ul>
-        </div>
-        <div class="menu-sacola" id="menu-sacola">
-            <button id="sair-sacola" onclick="fecharSacola()"><i class="fa-solid fa-xmark"></i></button>
-            <ul id="lista-compras">
-
-            </ul>
-        </div>
-    </header>
-
-    <main>
-        <div class="produto-container">
-            <div class="produto-img">
-                <img src="" alt="Imagem do produto" id="imagemProduto">
-            </div>
-            <h1 id="nomeProduto"></h1>
-            <div class="preco" id="precoProduto"></div>
-            <label for="tamanho">TAMANHO</label>
-            <ul>
-                <li><input type="radio" name="tamanho" value="2" id="tamP"><label for="tamP">P</label></li>
-                <li><input type="radio" name="tamanho" value="3" id="tamM"><label for="tamM">M</label></li>
-                <li><input type="radio" name="tamanho" value="4" id="tamG"><label for="tamG">G</label></li>
-            </ul>
-            <button onclick="comprar()">COMPRAR</button>
-        </div>
-    </main>
-
-    <script src="scripts/script.js"></script>
-    <script src="scripts/produto.js"></script>
+        <div style='display:flex;gap:6px;justify-content:flex-end;margin-bottom:18px;'>
+          <button class='cart-minus' data-id='${item.id}' style='width:28px;height:28px;border-radius:50%;border:1px solid #aaa;background:#f7f7f7;font-size:1.1rem;cursor:pointer;'>-</button>
+          <button class='cart-plus' data-id='${item.id}' style='width:28px;height:28px;border-radius:50%;border:1px solid #aaa;background:#f7f7f7;font-size:1.1rem;cursor:pointer;'>+</button>
+          <button class='cart-remove' data-id='${item.id}' style='width:28px;height:28px;border-radius:50%;border:1px solid #e74c3c;background:#fff;color:#e74c3c;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;' title='Remover'><ion-icon name="trash-outline"></ion-icon></button>
+        </div>`;
+      }).join('');
+      cartTotal.textContent = 'Total: R$ ' + total.toFixed(2);
+      // Eventos para os botões de quantidade e remover
+      setTimeout(() => {
+        document.querySelectorAll('.cart-plus').forEach(btn => {
+          btn.onclick = function() {
+            const id = Number(this.dataset.id);
+            let cart = JSON.parse(localStorage.getItem('carrinhoAbel') || '[]');
+            const found = cart.find(item => item.id === id);
+            if (found) found.qtd += 1;
+            localStorage.setItem('carrinhoAbel', JSON.stringify(cart));
+            renderCartSidebar();
+          };
+        });
+        document.querySelectorAll('.cart-minus').forEach(btn => {
+          btn.onclick = function() {
+            const id = Number(this.dataset.id);
+            let cart = JSON.parse(localStorage.getItem('carrinhoAbel') || '[]');
+            const found = cart.find(item => item.id === id);
+            if (found && found.qtd > 1) {
+              found.qtd -= 1;
+            } else {
+              // Remove se chegar a 1 e clicar em -
+              const idx = cart.findIndex(item => item.id === id);
+              if (idx !== -1) cart.splice(idx, 1);
+            }
+            localStorage.setItem('carrinhoAbel', JSON.stringify(cart));
+            renderCartSidebar();
+          };
+        });
+        document.querySelectorAll('.cart-remove').forEach(btn => {
+          btn.onclick = function() {
+            const id = Number(this.dataset.id);
+            let cart = JSON.parse(localStorage.getItem('carrinhoAbel') || '[]');
+            cart = cart.filter(item => item.id !== id);
+            localStorage.setItem('carrinhoAbel', JSON.stringify(cart));
+            renderCartSidebar();
+          };
+        });
+      }, 0);
+    }
+    document.getElementById('open-cart-sidebar').onclick = function() {
+      renderCartSidebar();
+      document.getElementById('cart-sidebar').style.right = '0';
+      document.getElementById('cart-sidebar-overlay').style.display = 'block';
+    };
+    document.getElementById('close-cart-sidebar').onclick = function() {
+      document.getElementById('cart-sidebar').style.right = '-400px';
+      document.getElementById('cart-sidebar-overlay').style.display = 'none';
+    };
+    document.getElementById('cart-sidebar-overlay').onclick = function() {
+      document.getElementById('cart-sidebar').style.right = '-400px';
+      document.getElementById('cart-sidebar-overlay').style.display = 'none';
+    };
+    // Atualizar contador da sacola
+    function updateCartCountBadge() {
+      const badge = document.getElementById('cart-count-badge');
+      let cart = JSON.parse(localStorage.getItem('carrinhoAbel') || '[]');
+      const totalQtd = cart.reduce((sum, item) => sum + item.qtd, 0);
+      if (totalQtd > 0) {
+        badge.textContent = totalQtd;
+        badge.style.display = 'inline-block';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+    document.addEventListener('DOMContentLoaded', updateCartCountBadge);
+    document.getElementById('open-cart-sidebar').addEventListener('click', updateCartCountBadge);
+    // Atualiza também após qualquer alteração no carrinho
+    const origSetItem = localStorage.setItem;
+    localStorage.setItem = function(key, value) {
+      origSetItem.apply(this, arguments);
+      if (key === 'carrinhoAbel') updateCartCountBadge();
+    };
+  </script>
 </body>
 </html>

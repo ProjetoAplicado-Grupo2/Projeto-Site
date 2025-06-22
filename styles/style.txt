@@ -1,0 +1,106 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+header{
+    position: fixed;
+    width: 99%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 10;
+}
+
+header a{
+    text-decoration: none;
+    color: #000000;
+}
+
+header .esquerda, header .direita{
+    width: 150px;
+    display: flex;
+    gap: 16px;
+    background-color: lightblue;
+}
+header .centro{
+    background-color: lightcoral;
+    
+}
+
+header button{
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+header button :hover{
+    transform: scale(1.1);
+    transition: 0.1s;
+}
+
+main{
+    display: flex;
+    margin: 50px 10px;
+    flex-direction: column;
+    
+}
+
+.menu-lateral{
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 250px;
+    height: 100%;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    transition: left 0.3s ease;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.menu-lateral ul{
+    list-style: none;
+}
+
+.menu-lateral ul li a{
+    color: white;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+.menu-lateral button{
+    display: flex;
+    justify-self: flex-end;
+}
+
+.menu-lateral.ativo{
+    left: 0;
+}
+
+.menu-sacola{
+    position: fixed;
+    top: 0;
+    right: -350px;
+    width: 300px;
+    height: 100%;
+    background-color: white;
+    color: #000000;
+    transition: right 0.3s ease;
+    padding: 20px;
+    box-shadow: 2px 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.menu-sacola.ativo{
+    right: 0px;
+}
